@@ -39,7 +39,7 @@ A full-stack web application for restaurant management built with Spring Boot, S
 #### Steps
 1.  **Clone the repository:**
     ```bash
-    git clone [your-repository-url]
+    git clone https://github.com/Prajwalmuthaye/Restaurant-Management-System.git
     ```
 2.  **Create the database:**
     Open MySQL and run the following command to create the database:
