@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        #app {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .menu-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        .menu-item h3 {
+            margin: 0 0 5px 0;
+            color: #555;
+        }
+        .menu-item .price {
+            float: right;
+            font-weight: bold;
+            color: #008000;
+        }
+        .menu-item p {
+            margin: 0;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h1>Restaurant Menu</h1>
+    <div id="menu-list">
+        <p>Loading menu...</p>
+    </div>
+</div>
+
+<script>
+    // This function runs when the webpage has finished loading
+    window.onload = function() {
+        fetchMenuItems();
+    };
+
+    // This function sends a GET request to your Spring Boot API
+    function fetchMenuItems() {
+        // The URL of your backend endpoint
+        const apiUrl = 'http://localhost:8080/api/menu';
+
+        fetch(apiUrl)
+            .then(response => {
+                // Check if the response is successful
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // Convert the response to JSON
+                return response.json();
+            })
+            .then(menuItems => {
+                // Once we have the data, we display it
+                displayMenuItems(menuItems);
+            })
+            .catch(error => {
+                // If there's an error (e.g., the backend is not running), show an error message
+                console.error('Error fetching menu:', error);
+                const menuListDiv = document.getElementById('menu-list');
+                menuListDiv.innerHTML = '<p style="color: red;">Failed to load menu. Please make sure the server is running.</p>';
+            });
+    }
+
+    // This function takes the menu data and creates HTML elements to show it on the page
+    function displayMenuItems(menuItems) {
+        const menuListDiv = document.getElementById('menu-list');
+        // Clear the "Loading..." message
+        menuListDiv.innerHTML = '';
+
+        // If there are no items, show a message
+        if (menuItems.length === 0) {
+            menuListDiv.innerHTML = '<p>No menu items available.</p>';
+            return;
+        }
+
+        // Loop through each menu item and create a div for it
+        menuItems.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'menu-item';
+
+            // Format the price to two decimal places
+            const price = `₹${item.price.toFixed(2)}`;
+
+            itemDiv.innerHTML = `
+                <span class="price">${price}</span>
+                <h3>${item.name}</h3>
+                <p>${item.description}</p>
+            `;
+
+            menuListDiv.appendChild(itemDiv);
+
+        });
+    }
+</script>
+</body>
+</html>
