@@ -108,3 +108,12 @@ The application is seeded with two default users. The password for both is `pass
 ## OUTPUT
 
 ![homepage](https://github.com/user-attachments/assets/c5f0470e-df42-42d1-ab08-722218981b10)
+
+![menu](https://github.com/user-attachments/assets/4154f3a8-493d-445a-88a2-4f9e8ee4aa2e)
+
+![place order](https://github.com/user-attachments/assets/9928bbb7-c2ea-4016-8c59-db1d9405ab90)
+
+![order](https://github.com/user-attachments/assets/0c186804-3cb9-42d7-871b-e6139a2f4bb5)
+
+![report](https://github.com/user-attachments/assets/18ac137d-990a-43c5-957c-85134da7cc3c)
+
